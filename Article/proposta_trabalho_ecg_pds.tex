@@ -315,7 +315,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{An\'alise de tr\'afego de dados \\ por transmiss\~ao sem fio}
+\title{Classificação de arritmia cardíaca utilizando Transformada \textit{Wavelets} e Redes Neurais por meio de extração de características}
 
 
 % author names and affiliations
@@ -404,24 +404,57 @@ Sendo assim, no t\'opico seguinte as propostas desse projeto ser\~ao apresentada
 
 \section{Fundamentação Teórica}
 
-\subsection{Coração e Eletrocardiogramas (ECG)}
+\subsection{Coração}
 
-O coração consiste em um órgão localizado atrás da caixa toráxica, na parte central do peito e entre o pulmão direito e esquerdo \cite{nih2011}. Sua função consiste no batimento ou contração para bombeamento do sangue para todo o corpo por meio de um sistema de vasos sanguíneos \cite{gray1979}.
+O coração consiste em um órgão localizado atrás da caixa toráxica, na parte central do peito entre o pulmão direito e esquerdo \cite{nih11}. Sua função consiste no batimento ou contração para bombeamento do sangue para todo o corpo por meio de um sistema de vasos sanguíneos \cite{gray79}.
 
-Para realizar o processo de bombeamento de sangue, o coração depende da seção direita e esquerda, onde cada uma delas possui duas cavidades: átrio e ventrículo, sendo a primeira superior e a segunda inferior. O fluxo do sangue é realizado por meio de válvulas entre o átrio e o ventrículo, sempre seguindo a direção do primeiro para o segundo.
+Para realizar o processo de bombeamento de sangue, o coração depende da sua seção direita e esquerda, onde cada uma delas possui duas cavidades: átrio e ventrículo, sendo a primeira superior e a segunda inferior. O fluxo do sangue é realizado por meio de válvulas entre o átrio e o ventrículo, sempre seguindo a direção do primeiro para o segundo.
 
-Por meio dessas válvulas é possível realizar o processamento do oxigênio e do gás carbônico, onde a seção esquerda do coração é responsável pelo envio de sangue com oxigênio para o corpo e a direita pelo recebimento do sangue com gás carbônico de diferentes partes do corpo \cite{nih2011}.
-
-
-
-Antes de qualquer tratamento de dados em transmiss\~oes sem fio, tem-se como o objetivo realizar a conex\~ao dos m\'odulos de r\'adio frequ\^encia com as plataformas abertas \textit{Arduino}. O trabalho visa utilizar dois m\'odulos transceptores \textit{nRF24L01} de 2.4GHz e dois \textit{shields} de \textit{Arduino} UNO, de forma que os m\'odulos transceptores s\~ao conectados as portas seriais dos \textit{Arduinos} UNO por meio de 8 portas, comunicando-se com o \textit{shield} em quest\~ao por meio do protocolo SPI (Serial Peripheral Interface) e por meio da modula\c{c}\~ao GFSK (\textit{Gaussian Frequency Shift Keying}) do sinal, sendo esse \'ultimo um m\'etodo de invers\~ao da frequ\^encia por meio de um filtro Gaussiano \cite{pdsGFSKModulation} j\'a incluso no dispositivo eletr\^onico. Por ser um transceptor, esses m\'odulos utilizados permitem a comunica\c{c}\~ao \textit{full-duplex}, pois permitem a transmiss\~ao e a recep\c{c}\~ao durante o mesmo per\'iodo de tempo \cite{datasheetNRF24L01}. A representa\c{c}\~ao do diagrama de bloco do transceptor utilizado, com entradas (conectadas ao protocolo SPI), controle de r\'adio, filtros e modulador/demodulador utilizados, podem ser visualizadas na figura \ref{diagramaNrf24l01}.
+Por meio dessas válvulas é possível realizar o processamento do oxigênio e do gás carbônico, onde a seção esquerda do coração é responsável pelo envio de sangue com oxigênio para o corpo, enquanto a direita cuida do recebimento do sangue com gás carbônico de diferentes partes do corpo \cite{nih11}. A cada contração de cada câmara do miocárdio - fluxo de sangue entre o átrio e o ventrículo - acontece o evento chamado de sístole, enquanto no relaxamento ocorre a diástole - processo o qual é repassado para o pulmão para realização da troca de gases \cite{nih11}.
 
 \begin{figure}[!b]
-\centering
-\includegraphics[width=3in]{diagramanrf24l01}
-\caption{Diagrama representativo de bloco do m\'odulo nRF24L01.}
-\label{diagramaNrf24l01}
+	\centering
+	\includegraphics[width=3in]{coracaoEsquematico}
+	\caption{Representação interna do coração e suas cavidades.}
+	\label{coracaoEsquematico}
 \end{figure}
+
+Uma das estruturas internas primordial para determinar o ritmo do coração chama-se nódulo sinoatrial (SA), ou também chamado de marca-passo. Localizada entre o átrio direito e a veia cava superior, ele atua controlando a frequência dos batimentos cardíacos, com cerca de 72 contrações por minuto. Por ter uma frequência alta, seus impulsos se espalham para os átrios e ventrículos, excitando todas as áreas e determinando o ritmo de batimento de quase todo o coração  \cite{guyton06}.
+
+O coração, por meio do seu batimento, realiza vários eventos cardíacos chamados de ciclos cardíacos, começando pela geração de um potencial de ação propagado pelos átrios até chegar nos ventrículos. Esse ciclo cardíaco vai conter o relaxamento pela diástole (coração enche de sangue) e a sístole (contração das câmaras de bombeamento). Conforme representado pelos traçados da Figura \ref{eventosCicloCardiaco}, pode-se visualizar os períodos de pressão (mm Hg), volume (ml), eletrocardiograma, fonocardiograma, sendo o penúltimo a representação gráfica utilizada nesse trabalho para classificação de arritmias.
+
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=3in]{eventosCicloCardiaco}
+	\caption{Eventos do ciclo cardíaco representados por diferentes traçados no ventrículo esquerdo.}
+	\label{eventosCicloCardiaco}
+\end{figure}
+
+\subsection{Eletrocardiograma (ECG)}
+
+Conforme visualizado no tópico anterior, o nódulo sinoatrial (SA) determina o ritmo do coração por seus impulsos com uma frequência alta. A partir dessa excitação, ocorre paralelamente a propagação de correntes do campo elétrico no músculo cardíaco e nos tecidos das regiões vizinhas, inclusive atingindo a superfície do corpo. Como esse fluxo ocorre entre diversos locais do corpo, pode-se captar diferenças de potenciais por meio de eletrodos na pele, em pontos opostos do coração. Essas medidas podem ser coletadas por meio de 12 derivações clássicas, normalmente se baseando pelo triângulo de Einthoven, representado pela Figura \ref{trianguloEinthoven}.
+
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=3in]{trianguloEinthoven}
+	\caption{Representação do triângulo de Einthoven, com eletrodos sobre os pulsos (RA e LA) e no tornozelo esquerdo (LL).}
+	\label{trianguloEinthoven}
+\end{figure}
+
+Por meio de um amplificador, esses potenciais são adquiridos por um período de tempo, em localizações conforme estabelecidas pelas derivações. Esse processo trata-se da eletrocardiografia, também conhecida como o exame de eletrocardiograma (ECG), apresentando a excitação cardíaca de forma gráfica para análise patológica por um cardiologista. Esse exame de baixo custo permite a análise de uma cardiopatia/arritmia no momento de ocorrência da mesma, analisando normalmente os segmentos, intervalos e ondas do sinal de ECG.
+
+Um registro de ECG, representado na Figura \ref{eletrocardiogramaIntervalos}, é representado por meio da voltagem plotada no eixo y pelo tempo no eixo x, onde seu sinal traduz o registro das despolarizações e repolarizações por meio de cinco etapas, representadas pelos formatos de onda P, Q, R, S e T \cite{mello91}.
+
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=3in]{eletrocardiogramaIntervalos}
+	\caption{Registro de eletrocardiograma com diferentes tipos de intervalos.}
+	\label{eletrocardiogramaIntervalos}
+\end{figure}
+
+Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada, como o intervalo entre a onda P e R que representa o tempo de condução do estímulo através do nódulo atrioventricular; o complexo QRS, que representa a despolarização ventricular.
+
+Antes de qualquer tratamento de dados em transmiss\~oes sem fio, tem-se como o objetivo realizar a conex\~ao dos m\'odulos de r\'adio frequ\^encia com as plataformas abertas \textit{Arduino}. O trabalho visa utilizar dois m\'odulos transceptores \textit{nRF24L01} de 2.4GHz e dois \textit{shields} de \textit{Arduino} UNO, de forma que os m\'odulos transceptores s\~ao conectados as portas seriais dos \textit{Arduinos} UNO por meio de 8 portas, comunicando-se com o \textit{shield} em quest\~ao por meio do protocolo SPI (Serial Peripheral Interface) e por meio da modula\c{c}\~ao GFSK (\textit{Gaussian Frequency Shift Keying}) do sinal, sendo esse \'ultimo um m\'etodo de invers\~ao da frequ\^encia por meio de um filtro Gaussiano \cite{pdsGFSKModulation} j\'a incluso no dispositivo eletr\^onico. Por ser um transceptor, esses m\'odulos utilizados permitem a comunica\c{c}\~ao \textit{full-duplex}, pois permitem a transmiss\~ao e a recep\c{c}\~ao durante o mesmo per\'iodo de tempo \cite{datasheetNRF24L01}. A representa\c{c}\~ao do diagrama de bloco do transceptor utilizado, com entradas (conectadas ao protocolo SPI), controle de r\'adio, filtros e modulador/demodulador utilizados, podem ser visualizadas na figura \ref{diagramaNrf24l01}.
 
 Ap\'os a conex\~ao dos m\'odulos com os \textit{Arduinos}, pretende-se realizar a comunica\c{c}\~ao entre os m\'odulos por meio de uma biblioteca/driver chamado RF24, dado que o mesmo j\'a possui m\'etodos prontos de atua\c{c}\~ao de pot\^encia, taxas de transmiss\~ao, e at\'e mesmo de estabelecimento de uma topologia de rede \cite{driverRF24}.
 
@@ -604,7 +637,7 @@ O projeto tamb\'em poder\'a trabalhar com os seguintes artigos, dependendo do n\
 % http://mirror.ctan.org/biblio/bibtex/contrib/doc/
 % The IEEEtran BibTeX style support page is at:
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
-\def\refname{Refer\^encias}
+\def\refname{Referências}
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{IEEEabrv}
@@ -612,7 +645,7 @@ O projeto tamb\'em poder\'a trabalhar com os seguintes artigos, dependendo do n\
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-% \begin{thebibliography}{1}
+%\begin{thebibliography}{1}
 
 %\bibitem{IEEEhowto:kopka}
 %H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
