@@ -407,6 +407,13 @@ Sendo assim, no t\'opico seguinte as propostas desse projeto ser\~ao apresentada
 \subsection{Coração e Eletrocardiogramas (ECG)}
 
 O coração consiste em um órgão localizado atrás da caixa toráxica, na parte central do peito e entre o pulmão direito e esquerdo \cite{nih2011}. Sua função consiste no batimento ou contração para bombeamento do sangue para todo o corpo por meio de um sistema de vasos sanguíneos \cite{gray1979}.
+
+Para realizar o processo de bombeamento de sangue, o coração depende da seção direita e esquerda, onde cada uma delas possui duas cavidades: átrio e ventrículo, sendo a primeira superior e a segunda inferior. O fluxo do sangue é realizado por meio de válvulas entre o átrio e o ventrículo, sempre seguindo a direção do primeiro para o segundo.
+
+Por meio dessas válvulas é possível realizar o processamento do oxigênio e do gás carbônico, onde a seção esquerda do coração é responsável pelo envio de sangue com oxigênio para o corpo e a direita pelo recebimento do sangue com gás carbônico de diferentes partes do corpo \cite{nih2011}.
+
+
+
 Antes de qualquer tratamento de dados em transmiss\~oes sem fio, tem-se como o objetivo realizar a conex\~ao dos m\'odulos de r\'adio frequ\^encia com as plataformas abertas \textit{Arduino}. O trabalho visa utilizar dois m\'odulos transceptores \textit{nRF24L01} de 2.4GHz e dois \textit{shields} de \textit{Arduino} UNO, de forma que os m\'odulos transceptores s\~ao conectados as portas seriais dos \textit{Arduinos} UNO por meio de 8 portas, comunicando-se com o \textit{shield} em quest\~ao por meio do protocolo SPI (Serial Peripheral Interface) e por meio da modula\c{c}\~ao GFSK (\textit{Gaussian Frequency Shift Keying}) do sinal, sendo esse \'ultimo um m\'etodo de invers\~ao da frequ\^encia por meio de um filtro Gaussiano \cite{pdsGFSKModulation} j\'a incluso no dispositivo eletr\^onico. Por ser um transceptor, esses m\'odulos utilizados permitem a comunica\c{c}\~ao \textit{full-duplex}, pois permitem a transmiss\~ao e a recep\c{c}\~ao durante o mesmo per\'iodo de tempo \cite{datasheetNRF24L01}. A representa\c{c}\~ao do diagrama de bloco do transceptor utilizado, com entradas (conectadas ao protocolo SPI), controle de r\'adio, filtros e modulador/demodulador utilizados, podem ser visualizadas na figura \ref{diagramaNrf24l01}.
 
 \begin{figure}[!b]
