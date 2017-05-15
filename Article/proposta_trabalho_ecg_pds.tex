@@ -452,13 +452,17 @@ Um registro de ECG, representado na Figura \ref{eletrocardiogramaIntervalos}, é
 	\label{eletrocardiogramaIntervalos}
 \end{figure}
 
-Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada, como o intervalo entre a onda P e R que representa o tempo de condução do estímulo através do nódulo atrioventricular; o complexo QRS, que representa a despolarização ventricular.
+Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada das cardiopatias, como o intervalo entre a onda P e R que representa o tempo de condução do estímulo através do nódulo atrioventricular; e o complexo QRS, que representa a despolarização ventricular. A partir desses subperíodos pode-se analisar as morfologias do exame, denominadas pela sequência de excitação e recuperação, respectivamente caracterizados pela despolarização e repolarização por meio da
+diferença de potencial resultante, conforme representado pela Figura \ref{sequenciaDespolarizacacoPolarizacao}.
 
-Antes de qualquer tratamento de dados em transmiss\~oes sem fio, tem-se como o objetivo realizar a conex\~ao dos m\'odulos de r\'adio frequ\^encia com as plataformas abertas \textit{Arduino}. O trabalho visa utilizar dois m\'odulos transceptores \textit{nRF24L01} de 2.4GHz e dois \textit{shields} de \textit{Arduino} UNO, de forma que os m\'odulos transceptores s\~ao conectados as portas seriais dos \textit{Arduinos} UNO por meio de 8 portas, comunicando-se com o \textit{shield} em quest\~ao por meio do protocolo SPI (Serial Peripheral Interface) e por meio da modula\c{c}\~ao GFSK (\textit{Gaussian Frequency Shift Keying}) do sinal, sendo esse \'ultimo um m\'etodo de invers\~ao da frequ\^encia por meio de um filtro Gaussiano \cite{pdsGFSKModulation} j\'a incluso no dispositivo eletr\^onico. Por ser um transceptor, esses m\'odulos utilizados permitem a comunica\c{c}\~ao \textit{full-duplex}, pois permitem a transmiss\~ao e a recep\c{c}\~ao durante o mesmo per\'iodo de tempo \cite{datasheetNRF24L01}. A representa\c{c}\~ao do diagrama de bloco do transceptor utilizado, com entradas (conectadas ao protocolo SPI), controle de r\'adio, filtros e modulador/demodulador utilizados, podem ser visualizadas na figura \ref{diagramaNrf24l01}.
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=3in]{sequenciaDespolarizacacoPolarizacao}
+	\caption{Sequência de despolarização e repolarização com a representação das ondas e subperíodos.}
+	\label{sequenciaDespolarizacacoPolarizacao}
+\end{figure}
 
-Ap\'os a conex\~ao dos m\'odulos com os \textit{Arduinos}, pretende-se realizar a comunica\c{c}\~ao entre os m\'odulos por meio de uma biblioteca/driver chamado RF24, dado que o mesmo j\'a possui m\'etodos prontos de atua\c{c}\~ao de pot\^encia, taxas de transmiss\~ao, e at\'e mesmo de estabelecimento de uma topologia de rede \cite{driverRF24}.
-
-Por fim, com a obten\c{c}\~ao da conex\~ao e transmiss\~ao de dados sendo realizada efetivamente, os dados - inclusos em um arquivo \textit{txt} - ser\~ao enviados para uma plataforma de tratamento de dados, que ser\'a apresentada no subt\'opico a seguir.
+Estas morfologias permitem a verificação de anormalidades no sistema de condução cardíaca, como as arritmias que pretendem ser extraídas por meio das redes neurais.
 
 \subsection{Arritmias}
 
