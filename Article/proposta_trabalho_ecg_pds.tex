@@ -315,7 +315,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Classificação de arritmia cardíaca utilizando Transformada \textit{Wavelets} e Redes Neurais por meio de extração de características}
+\title{Classificação de Arritmias Cardíacas utilizando Transformada \textit{Wavelets} e Redes Neurais por meio de extração de características}
 
 
 % author names and affiliations
@@ -394,9 +394,11 @@ Email: joaobertoncini@alunos.utfpr.edu.br}
 
 \section{Introdução}
 % no \IEEEPARstart
-O objetivo desse documento \'e apresentar a proposta de trabalho referente a an\'alise de tr\'afego de dados por meio de transmiss\~ao sem fio.
-O enfoque ser\'a o envio de dados por meio de componentes eletr\^onicos - principalmente a plataforma aberta \textit{Arduino} e \textit{shields} complementares - para an\'alise e tratamento, de forma que a verifica\c{c}\~ao dos sinais dos pacotes seja analisada e modulada para poss\'iveis corre\c{c}\~ao de erros, os quais s\~ao provenientes, por exemplo, de interfer\^encia eletromagn\'etica, dist\^ancias de alcance e obst\'aculos de materiais \cite{ciscoRfProblems}.
-Sendo assim, no t\'opico seguinte as propostas desse projeto ser\~ao apresentadas no maior detalhe.
+O objetivo desse documento consiste na apresentação da proposta de trabalho referente a classificação de três tipos de arritmias cardíacas utilizando transformada \textit{Wavelets} e Redes Neurais.
+
+O enfoque está na extração de características de um sinal de Eletrocardiograma (ECG) e na classificação de cada um dos sinais por meio de um treinamento em redes neurais. Os sinais serão obtidos diretamente da base de dados \textit{MIT-BIH} - \textit{Arrhythmia Database}. Por meio da normalização dos sinais, pretende-se avaliar os resultados na taxa de acerto da rede neural, comparando–a com a de outros trabalhos.
+
+Sendo assim, uma fundamentação teórica do contexto será apresentada, para então ser discutido sobre as ferramentas de trabalho e o cronograma do projeto.
 
 %\hfill mds
  
@@ -477,20 +479,38 @@ Dentre os mais diversos tipos de classificação de arritmias, elas podem ser di
 	\label{ecgTaquicardiaVentricular}
 \end{figure}
 
-\subsection{Processamento do Sinal com \textit{Wavelets}}
-Com os dados obtidos e transmitidos corretamente para o \textit{Python}, al\'em de usar os m\'odulos \textit{SciPy} e \textit{MatPlotLib}, tem-se a inten\c{c}\~ao de gerar gr\'aficos estat\'isticos sobre a transmiss\~ao dos pacotes e os sinais transmitidos \cite{pythonPSV}. A partir dos valores obtidos e os gr\'aficos representativos, pretende-se verificar poss\'iveis taxas de erros na transmiss\~ao, perdas de pacotes e at\'e varia\c{c}\~oes na estabilidade de conex\~ao segundo os mesmo t\'opicos apresentados na introdu\c{c}\~ao desse trabalho \cite{ciscoRfProblems}.
+\subsection{Processamento do Sinal com Transformadas \textit{Wavelets}}
+A \textit{Wavelet} trata-se de uma função que descreve e decompõe outras funções no domínio da frequência, garantindo a análise além do domínio do tempo. A sua decomposição acontece por meio da Transformada \textit{Wavelet}, que trata de uma técnica por dimensão de janela variável, avaliando o sinal no espaço tempo x frequência e os componentes espectrais em um intervalo de tempo \cite{graps95}.
 
-A partir dessas propostas, o projeto pretende seguir uma linha de cronograma segundo o t\'opico seguinte, utilizando como ferramenta de gerenciamento de projetos o \textit{Trello}.
+Por trabalhar com janelas, a Transformada \textit{Wavelet} permite que ocorra o translado no tempo se baseando em \textit{Wavelets}-mãe, a qual se fornece como protótipo para todas janelas criadas no procedimento de análise do sinal \cite{graps95}.
+
+Por permitir a decomposição do sinal em várias funções no domínio do tempo e frequência, essa transformada possui uma grande abrangência para análise e compreensão de sinais, podendo inclusive ser dividida em contínua e discreta.
+
+Na Transformada \textit{Wavelet} Contínua (TWC) a variável translação representa o deslocamento da janela de amostragem ao longo do tempo, sendo matematicamente definida em F(a,b):
+
+\[ 	F(a,b) = \int^{+\infty}_{-\infty} f(t)\Psi_{a,b} dt \]
+
+Cada sinal pode determinar um tipo de \textit{Wavelet}-mãe que pode ser utilizado por uma TWC, como os representados na Figura \ref{waveletContinuaFamilias}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/waveletContinuaFamilias}
+	\caption{Famílias de TWC: (a) Daubechies; (b) Coiflet; (c) Haar; (d) Symmlet.}
+	\label{waveletContinuaFamilias}
+\end{figure}
+
+A Transformada \textit{Wavelet} Discreta (TWD) permite não perder suas qualidades e propriedades, portando-se de maneira numericamente estável e com uma menor redundância de informação \cite{silva06}. A sua realização acontece por meio de filtragens digitais sucessivas sobre o sinal
+original, onde um par de filtros digitais definidos como filtros em quadratura é descrito pelas funções h(n) e g(n), sendo estas, respectivamente, as funções resposta ao impulso de um filtro passa-baixa e passa-alta, cada um com metade da banda do sinal original \cite{castelano06}. Ela é matematicamente definida em $F_{m,n}(a,b)$:
+
+\[ 	F_{m,n}(a,b) = a_{0}^{-j/2}\int f(t)\Psi (a_{0}^{-j}t - nb_{0}) \]
 
 \subsection{Classificação de Sinais}
-Com os dados obtidos e transmitidos corretamente para o \textit{Python}, al\'em de usar os m\'odulos \textit{SciPy} e \textit{MatPlotLib}, tem-se a inten\c{c}\~ao de gerar gr\'aficos estat\'isticos sobre a transmiss\~ao dos pacotes e os sinais transmitidos \cite{pythonPSV}. A partir dos valores obtidos e os gr\'aficos representativos, pretende-se verificar poss\'iveis taxas de erros na transmiss\~ao, perdas de pacotes e at\'e varia\c{c}\~oes na estabilidade de conex\~ao segundo os mesmo t\'opicos apresentados na introdu\c{c}\~ao desse trabalho \cite{ciscoRfProblems}.
+Como o objetivo do trabalho consiste na análise e classificação de arritmias por meio de Redes Neurais, faz-se necessário realizar a extração das características dos sinais para poder classificar com um certo grau de confiabilidade por meio de Redes Neurais Artificiais.
 
-A partir dessas propostas, o projeto pretende seguir uma linha de cronograma segundo o t\'opico seguinte, utilizando como ferramenta de gerenciamento de projetos o \textit{Trello}.
+O primeiro passo necessário para a classificação de sinais se encontra na normalização do sinal de ECG afim de obter e tratar pedaços de amostras obtidas do sinal. Para realizar esse processo utilizam-se diversos tipos de funções matemáticas, selecionando as amostras filtradas - por janelamento de TWD com extração dos coeficientes, por exemplo - ou através de extração de características diretas do sinal, como o intervalo RR e frequência cardíaca.
 
 \subsection{Redes Neurais Artificiais}
-Com os dados obtidos e transmitidos corretamente para o \textit{Python}, al\'em de usar os m\'odulos \textit{SciPy} e \textit{MatPlotLib}, tem-se a inten\c{c}\~ao de gerar gr\'aficos estat\'isticos sobre a transmiss\~ao dos pacotes e os sinais transmitidos \cite{pythonPSV}. A partir dos valores obtidos e os gr\'aficos representativos, pretende-se verificar poss\'iveis taxas de erros na transmiss\~ao, perdas de pacotes e at\'e varia\c{c}\~oes na estabilidade de conex\~ao segundo os mesmo t\'opicos apresentados na introdu\c{c}\~ao desse trabalho \cite{ciscoRfProblems}.
 
-A partir dessas propostas, o projeto pretende seguir uma linha de cronograma segundo o t\'opico seguinte, utilizando como ferramenta de gerenciamento de projetos o \textit{Trello}.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -606,12 +626,12 @@ Semana 19/06 & Finalização do Relatório e Apresentação Final\\
 \end{tabular}
 \end{table}
 
-\section{Conclus\~ao}
-Como apresentado anteriormente, o objetivo desse trabalho \'e realizar n\~ao apenas a conex\~ao entre dois m\'odulos de r\'adio frequ\^encia, mas principalmente realizar a an\'alise dos pacotes e dados enviados, verificando poss\'iveis erros e perdas. Nesse quesito, o projeto deve apresentar, em sua entrega e apresenta\c{c}\~ao, a transmiss\~ao de pacotes de dados em tempo real e a gera\c{c}\~ao de gr\'aficos e dados estat\'isticos que possam ilustrar a situa\c{c}\~ao real dessa transfer\^encia sob diferentes aspectos do meio.
+%\section{Conclus\~ao}
+%Como apresentado anteriormente, o objetivo desse trabalho \'e realizar n\~ao apenas a conex\~ao entre dois m\'odulos de r\'adio frequ\^encia, mas principalmente realizar a an\'alise dos pacotes e dados enviados, verificando poss\'iveis erros e perdas. Nesse quesito, o projeto deve apresentar, em sua entrega e apresenta\c{c}\~ao, a transmiss\~ao de pacotes de dados em tempo real e a gera\c{c}\~ao de gr\'aficos e dados estat\'isticos que possam ilustrar a situa\c{c}\~ao real dessa transfer\^encia sob diferentes aspectos do meio.
 
-Caso seja poss\'ivel, o projeto tamb\'em pode visar o tratamento desses dados diretamente nos atuadores, visualizando poss\'iveis situa\c{c}\~oes que possam corrigir e inibir erros e atenua\c{c}\~oes que influenciam e impedem o tr\'afego dos dados da melhor maneira poss\'ivel.
+%Caso seja poss\'ivel, o projeto tamb\'em pode visar o tratamento desses dados diretamente nos atuadores, visualizando poss\'iveis situa\c{c}\~oes que possam corrigir e inibir erros e atenua\c{c}\~oes que influenciam e impedem o tr\'afego dos dados da melhor maneira poss\'ivel.
 
-O projeto tamb\'em poder\'a trabalhar com os seguintes artigos, dependendo do n\'ivel de desenvolvimento do estudo: \cite{performanceAnalysisNRF24L01}, \cite{efficientRFPowerTransfer} e \cite{selectionOpticalWavelengthDataTransmission}.
+%O projeto tamb\'em poder\'a trabalhar com os seguintes artigos, dependendo do n\'ivel de desenvolvimento do estudo: \cite{performanceAnalysisNRF24L01}, \cite{efficientRFPowerTransfer} e \cite{selectionOpticalWavelengthDataTransmission}.
 
 
 % conference papers do not normally have an appendix
