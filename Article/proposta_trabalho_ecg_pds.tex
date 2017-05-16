@@ -412,7 +412,7 @@ Para realizar o processo de bombeamento de sangue, o coração depende da sua se
 
 Por meio dessas válvulas é possível realizar o processamento do oxigênio e do gás carbônico, onde a seção esquerda do coração é responsável pelo envio de sangue com oxigênio para o corpo, enquanto a direita cuida do recebimento do sangue com gás carbônico de diferentes partes do corpo \cite{nih11}. A cada contração de cada câmara do miocárdio - fluxo de sangue entre o átrio e o ventrículo - acontece o evento chamado de sístole, enquanto no relaxamento ocorre a diástole - processo o qual é repassado para o pulmão para realização da troca de gases \cite{nih11}.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=3in]{coracaoEsquematico}
 	\caption{Representação interna do coração e suas cavidades.}
@@ -423,7 +423,7 @@ Uma das estruturas internas primordial para determinar o ritmo do coração cham
 
 O coração, por meio do seu batimento, realiza vários eventos cardíacos chamados de ciclos cardíacos, começando pela geração de um potencial de ação propagado pelos átrios até chegar nos ventrículos. Esse ciclo cardíaco vai conter o relaxamento pela diástole (coração enche de sangue) e a sístole (contração das câmaras de bombeamento). Conforme representado pelos traçados da Figura \ref{eventosCicloCardiaco}, pode-se visualizar os períodos de pressão (mm Hg), volume (ml), eletrocardiograma, fonocardiograma, sendo o penúltimo a representação gráfica utilizada nesse trabalho para classificação de arritmias.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=3in]{eventosCicloCardiaco}
 	\caption{Eventos do ciclo cardíaco representados por diferentes traçados no ventrículo esquerdo.}
@@ -434,7 +434,7 @@ O coração, por meio do seu batimento, realiza vários eventos cardíacos chama
 
 Conforme visualizado no tópico anterior, o nódulo sinoatrial (SA) determina o ritmo do coração por seus impulsos com uma frequência alta. A partir dessa excitação, ocorre paralelamente a propagação de correntes do campo elétrico no músculo cardíaco e nos tecidos das regiões vizinhas, inclusive atingindo a superfície do corpo. Como esse fluxo ocorre entre diversos locais do corpo, pode-se captar diferenças de potenciais por meio de eletrodos na pele, em pontos opostos do coração. Essas medidas podem ser coletadas por meio de 12 derivações clássicas, normalmente se baseando pelo triângulo de Einthoven, representado pela Figura \ref{trianguloEinthoven}.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=3in]{trianguloEinthoven}
 	\caption{Representação do triângulo de Einthoven, com eletrodos sobre os pulsos (RA e LA) e no tornozelo esquerdo (LL).}
@@ -445,7 +445,7 @@ Por meio de um amplificador, esses potenciais são adquiridos por um período de
 
 Um registro de ECG, representado na Figura \ref{eletrocardiogramaIntervalos}, é representado por meio da voltagem plotada no eixo y pelo tempo no eixo x, onde seu sinal traduz o registro das despolarizações e repolarizações por meio de cinco etapas, representadas pelos formatos de onda P, Q, R, S e T \cite{mello91}.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=3in]{eletrocardiogramaIntervalos}
 	\caption{Registro de eletrocardiograma com diferentes tipos de intervalos.}
@@ -455,18 +455,27 @@ Um registro de ECG, representado na Figura \ref{eletrocardiogramaIntervalos}, é
 Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada das cardiopatias, como o intervalo entre a onda P e R que representa o tempo de condução do estímulo através do nódulo atrioventricular; e o complexo QRS, que representa a despolarização ventricular. A partir desses subperíodos pode-se analisar as morfologias do exame, denominadas pela sequência de excitação e recuperação, respectivamente caracterizados pela despolarização e repolarização por meio da
 diferença de potencial resultante, conforme representado pela Figura \ref{sequenciaDespolarizacacoPolarizacao}.
 
-\begin{figure}[!b]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=3in]{sequenciaDespolarizacacoPolarizacao}
 	\caption{Sequência de despolarização e repolarização com a representação das ondas e subperíodos.}
 	\label{sequenciaDespolarizacacoPolarizacao}
 \end{figure}
 
-Estas morfologias permitem a verificação de anormalidades no sistema de condução cardíaca, como as arritmias que pretendem ser extraídas por meio das redes neurais.
+Estas morfologias permitem a verificação de anormalidades no sistema de condução cardíaca, como as arritmias que vão ser extraídas por meio das redes neurais nesse trabalho.
 
 \subsection{Arritmias}
 
-Para o tratamento estat\'istico das informa\c{c}\~oes de transmiss\~ao, ser\'a utilizada a linguagem \textit{Python}, na sua vers\~ao 2.7. Para a conex\~ao com o \textit{Arduino}, ser\'a utilizado o m\'odulo \textit{Pyserial} 3.0.1, que possui m\'etodos para a comunica\c{c}\~ao da porta serial com a placa - seja do \textit{Arduino} para o \textit{Python} como a transmiss\~ao inversa. No c\'odigo fonte gerado para o \textit{Arduino}, s\~ao utilizados m\'etodos que reproduzem as informa\c{c}\~oes na porta serial. A \textit{Pyserial} \'e respons\'avel pela identifica\c{c}\~ao de todos os dados impressos via porta serial, no quais s\~ao armazenados em vetores. O objetivo final dessa proposta \'e a conex\~ao correta e completa entre os \textit{Arduinos} de TX e RX (transmiss\~ao e recep\c{c}\~ao, respectivamente) e o \textit{Python}, de forma que o pr\'oximo t\'opico - Transmiss\~ao e Tratamento de Sinais - seja realizado com sucesso.
+Conforme apresentado, os exames de ECG permitem identificar anormalidades no sistema cardiológico, podendo representar diferentes cardiopatias. Essas cardiopatias podem ser sintomaticamente representadas por arritmias cardíacas, que ocorrem por alterações na formação/condução do impulso elétrico através do miocárdio \cite{sbc03}. O ECG é um dos principais exames para estudo e análise das arritmias justamente porque as mesmas podem modificar a origem/difusão fisiológica do estímulo elétrico, alterando o ritmo cardíaco normal \cite{goncalves95}.
+
+Dentre os mais diversos tipos de classificação de arritmias, elas podem ser divididas em duas categorias (assintomáticas e sintomáticas) e em dois grupos de frequência: bradicardia - frequência cardíaca menor que 60 batimentos por segundo, e taquicardia - frequência cardíaca maior que 100 batimentos por segundo \cite{guyton06}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{ecgTaquicardiaVentricular}
+	\caption{Exemplo de ECG com Taquicardia Ventricular (área tracejada).}
+	\label{ecgTaquicardiaVentricular}
+\end{figure}
 
 \subsection{Processamento do Sinal com \textit{Wavelets}}
 Com os dados obtidos e transmitidos corretamente para o \textit{Python}, al\'em de usar os m\'odulos \textit{SciPy} e \textit{MatPlotLib}, tem-se a inten\c{c}\~ao de gerar gr\'aficos estat\'isticos sobre a transmiss\~ao dos pacotes e os sinais transmitidos \cite{pythonPSV}. A partir dos valores obtidos e os gr\'aficos representativos, pretende-se verificar poss\'iveis taxas de erros na transmiss\~ao, perdas de pacotes e at\'e varia\c{c}\~oes na estabilidade de conex\~ao segundo os mesmo t\'opicos apresentados na introdu\c{c}\~ao desse trabalho \cite{ciscoRfProblems}.
@@ -551,9 +560,9 @@ A partir dessas propostas, o projeto pretende seguir uma linha de cronograma seg
 
 \section{Cronograma}
 
-O cronograma proposto para esse trabalho de an\'alise de tr\'afego de dados por transmiss\~ao sem fio usando RF (r\'adio frequ\^encia) tem um prazo de aproximadamente 12 semanas de trabalho, come\c{c}ando na \'ultima semana de mar\c{c}o e terminando na pen\'ultima semana de julho (28 de mar\c{c}o a 21 de junho). O trabalho consistir\'a de cerca de 8 semanas de pr\'atica e v\'arios testes envolvendo os m\'odulos RF, enquanto possuir\'a cerca de 6 semanas de estudo envolvendo tratamento de dados e sinais, os quais v\~ao estar presentes nos testes - ressaltando que duas dessas semanas ser\~ao conjuntas com testes de tratamento dos sinais obtidos. Al\'em disso, ser\'a destinada duas semanas a reda\c{c}\~ao exclusiva do artigo final previamente determinado, o qual ocorrer\'a nas semanas do dia 05 a 19 de junho.
+O cronograma proposto para esse trabalho de extração/análise de arritmias usando Transformadas \textit{Wavelet} e Redes Neurais tem um prazo de aproximadamente nove semanas de trabalho, começando na primeira semana de maio e terminando na penúltima semana de junho (01 de maio a 21 de junho). O trabalho consistirá de cerca de quatro semanas de estudo do contexto do problema e das ferramentas, enquanto as outras cinco semanas vão envolver a extração dos sinais e treinamento de uma rede neural para identificação dos mesmos. Além disso, duas semanas serão destinadas a redação do artigo final previamente determinado, o qual ocorrerá nas semanas do dia 12 a 21 de junho.
 
-Por fim, a pretens\~ao de temas a serem tratadas em cada semana pode ser melhor ilustrada na tabela \ref{table:cronogramaProjeto}.
+Por fim, a pretensão de tópicos a serem tratados em cada semana foi representado na Tabela \ref{table:cronogramaProjeto}.
 
 % An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table and, given that table
@@ -571,36 +580,28 @@ Por fim, a pretens\~ao de temas a serem tratadas em cada semana pode ser melhor 
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Cronograma de Temas do Projeto}
+\caption{Cronograma de Tópicos Trabalhados do Projeto}
 \label{table:cronogramaProjeto}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
 %% than the plain LaTeX2e tabular which is used here.
 \begin{tabular}{|c|c|}
 \hline
-Semana 27/03 & Testes de Conex\~ao \textit{Arduino} e m\'odulo RF\\
+Semana 01/05 & Estudo do contexto do artigo\\
 \hline
-Semana 03/04 & Testes de Conex\~ao \textit{Arduino} e \textit{Python}\\
+Semana 08/05 & Estudo de ECG e extração dos dados\\
 \hline
-Semana 10/04 & Proposta + Escrita do c\'odigo de transmiss\~ao\\
+Semana 15/05 & Estudo de transformada \textit{Wavelet}\\
 \hline
-Semana 17/04 & Escrita do c\'odigo de transmiss\~ao + Envio \textit{Python}\\
+Semana 22/05 & Estudo da aplicação de Redes Neurais e Algoritmos\\
 \hline
-Semana 24/04 & Estudo de tratamento de dados (Teoria e \textit{Python})\\
+Semana 29/05 & Extração e Classificação dos Sinais com \textit{Wavelet}\\
 \hline
-Semana 08/05 & Testes de c\'odigos + Gera\c{c}\~ao de gr\'aficos\\
+Semana 05/06 & Execução dos Aprendizados Supervisionados\\
 \hline
-Semana 15/05 & Apresenta\c{c}\~ao do Andamento + Gera\c{c}\~ao de gr\'aficos\\
+Semana 12/06 & Análise dos Aprendizados e Geração do Relatório\\
 \hline
-Semana 22/05 & Estudo de tratamento de dados (Teoria e \textit{Python})\\
-\hline
-Semana 29/05 & Estudo de tratamento de dados + Tratamento de Sinais\\
-\hline
-Semana 05/06 & Escrita do Artigo + Poss\'iveis modifica\c{c}\~oes\\
-\hline
-Semana 12/06 & Escrita do Artigo\\
-\hline
-Semana 19/06 & Apresenta\c{c}\~ao Final\\
+Semana 19/06 & Finalização do Relatório e Apresentação Final\\
 \hline
 \end{tabular}
 \end{table}
