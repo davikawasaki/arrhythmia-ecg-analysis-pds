@@ -10,7 +10,7 @@ function compareWaveletQRS(qrsEx)
 figure
 plot(qrsEx)
 hold on
-plot(2*circshift(mpdict(:,11),[-2 0]),'r')
+plot(2*circshift(mpdict(:,13),[-2 0]),'r')
 axis tight
 legend('QRS Complex','Sym4 Wavelet')
 title('Comparison of Sym4 Wavelet and QRS Complex')

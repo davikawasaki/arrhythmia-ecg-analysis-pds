@@ -1,6 +1,6 @@
-function [qrsExtracted, tmExtracted] = plotExtractQRS(minute, seconds, period, sizeEcgSig, timeEcgSig, ecgsig, tmSeg)
+function [qrsExtracted, tmExtracted] = plotExtractSingleQRS(minute, seconds, period, sizeEcgSig, timeEcgSig, ecgsig, tmSeg)
 
-% usage: [qrsExtracted, tmExtracted] = plotExtractQRS(1, 00.0123, 38154, 650000, ecgsig, tmSeg)
+% usage: [qrsExtracted, tmExtracted] = plotExtractSingleQRS(1, 00.0123, 38154, 650000, 1820, ecgsig, tmSeg)
 %
 % This function get a period to extract a QRS wave,
 % which may or not contain signal arrhytmias.
@@ -11,7 +11,7 @@ function [qrsExtracted, tmExtracted] = plotExtractQRS(minute, seconds, period, s
 %
 
 % Last version
-% readAnnotations.m           D. Kawasaki			16 June 2017
+% plotExtractSingleQRS.m           D. Kawasaki			16 June 2017
 % 		      Davi Kawasaki	       16 June 2017 version 1.0
 
 periodInterval = sizeEcgSig/timeEcgSig;
