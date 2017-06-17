@@ -1,4 +1,4 @@
-function [tm,ecgsig,Fs] = loadEcgSignal(Name)
+function [tm,ecgsig,Fs,sizeEcgSig,timeEcgSig] = loadEcgSignal(Name)
 
 % usage: loadEcgSignal('RECORDm')
 %
@@ -22,7 +22,7 @@ function [tm,ecgsig,Fs] = loadEcgSignal(Name)
 %
 
 % Adapted from
-% plotATM.m           O. Abdala			16 March 2009
+% loadEcgSignal.m           O. Abdala			16 March 2009
 % 		      James Hislop	       27 January 2014	version 1.1
 
 % Last version
@@ -54,6 +54,8 @@ for i = 1:size(ecgsig, 1)
 end
 
 tm = (1:size(ecgsig, 2)) * interval;
+sizeEcgSig = size(ecgsig, 2);
+timeEcgSig = sizeEcgSig*interval;
 %plot(x', val');
 
 %for i = 1:length(signal)
