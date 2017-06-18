@@ -17,16 +17,19 @@ function arrhythmiaMultipleQRS = extractMultipleQRS(arrhythmiaPeriods, sizeEcgSi
 periodInterval = sizeEcgSig/timeEcgSig;
 
 arrhythmiaMultipleQRS = {};
-qrsScale = 1;
+qrsScaleStart = 2;
+qrsScaleEnd = 1;
 
 % Increase the right period	in Ventricular bigeminy cases
 if(arrhythmiaType == 'B')
-    qrsScale = 2;
+    qrsScaleStart = 2;
+    qrsScaleEnd = 2;
+elseif(arrhythmiaType == 'T')
+    qrsScaleStart = 1;
+    qrsScaleEnd = 2.1;
 end
 
 for i = 1:size(arrhythmiaPeriods,1)-1
-    size(arrhythmiaPeriods,1)-1
-    i
     period = arrhythmiaPeriods{i,3};
     if(period == -1)
         %tmPeriod = arrhythmiaPeriods{i,3} * interval;
@@ -34,21 +37,23 @@ for i = 1:size(arrhythmiaPeriods,1)-1
         tmTotal = tmTotal + arrhythmiaPeriods{i,2};
         period = (tmTotal*sizeEcgSig)/timeEcgSig;
     end
+    
+    %i == size(arrhythmiaPeriods,1)
     % Arrhythmia detected in signal start
     if(period - periodInterval/2 <= 0)
         qrsExtracted = ecgsig(1:round(period + periodInterval));
         tmExtracted = tmSeg(1:round(period + periodInterval)); 
     % Arrhythmia detected in signal end for arrhythmiaType normal
-    elseif((arrhythmiaType ~= 'N') && period > size(arrhythmiaPeriods,1))
-        qrsExtracted = ecgsig(round(period - periodInterval/2):size(arrhythmiaPeriods,1));
-        tmExtracted = tmSeg(round(period - periodInterval/2):size(arrhythmiaPeriods,1)); 
+    elseif(~strcmp(arrhythmiaType,'N') && (i == size(arrhythmiaPeriods,1)))
+        qrsExtracted = ecgsig(round(period - periodInterval/qrsScaleStart):size(arrhythmiaPeriods,1));
+        tmExtracted = tmSeg(round(period - periodInterval/qrsScaleStart):size(arrhythmiaPeriods,1)); 
     % Arrhythmia detected in signal end for arrhythmiaTypes
-    elseif((arrhythmiaType == 'N') && i == size(arrhythmiaPeriods,1)-1)
-        qrsExtracted = ecgsig(round(period - periodInterval/2):size(arrhythmiaPeriods,1));
-        tmExtracted = tmSeg(round(period - periodInterval/2):size(arrhythmiaPeriods,1)); 
+    elseif(strcmp(arrhythmiaType,'N') && i == size(arrhythmiaPeriods,1)-1)
+        qrsExtracted = ecgsig(round(period - periodInterval/qrsScaleStart):size(arrhythmiaPeriods,1));
+        tmExtracted = tmSeg(round(period - periodInterval/qrsScaleStart):size(arrhythmiaPeriods,1)); 
     else
-        qrsExtracted = ecgsig(round(period - periodInterval/2):round(period + periodInterval*qrsScale));
-        tmExtracted = tmSeg(round(period - periodInterval/2):round(period + periodInterval*qrsScale)); 
+        qrsExtracted = ecgsig(round(period - periodInterval/qrsScaleStart):round(period + periodInterval*qrsScaleEnd));
+        tmExtracted = tmSeg(round(period - periodInterval/qrsScaleStart):round(period + periodInterval*qrsScaleEnd)); 
     end
     inst = {qrsExtracted tmExtracted arrhythmiaPeriods{i,4}};
     arrhythmiaMultipleQRS(end+1,:) = inst;

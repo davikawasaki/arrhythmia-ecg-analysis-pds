@@ -21,7 +21,8 @@ for i = 1:size(DWTsignalPeaks,1)
         % Check if at least 2 peaks were found
         if(length(DWTsignalPeaks{i,1}) >= 2 && length(DWTsignalPeaks{i,2}) >= 2)
             % Extraction for VT and B arrhythmia
-            if(strcmp(DWTsignalPeaks{i,3},'(VT') || strcmp(DWTsignalPeaks{i,3},'(B') || strcmp(DWTsignalPeaks{i,3},'(N'))
+            %if(strcmp(DWTsignalPeaks{i,3},'(VT') || strcmp(DWTsignalPeaks{i,3},'(B') || strcmp(DWTsignalPeaks{i,3},'(T') || strcmp(DWTsignalPeaks{i,3},'(N'))
+            if(strcmp(DWTsignalPeaks{i,3},'(VT'))
                 peakAmpR = DWTsignalPeaks{i,1}(end);
                 if(length(DWTsignalPeaks{i,1}) > 3)
                     peakIntervalRR = DWTsignalPeaks{i,2}(end-1) - DWTsignalPeaks{i,2}(1); 
@@ -30,8 +31,17 @@ for i = 1:size(DWTsignalPeaks,1)
                 end
                 inst = {peakAmpR peakIntervalRR DWTsignalPeaks{i,3}};
                 features(end+1,:) = inst;
+                
+            % Other types of arrhythmia
             else
-                % Other types of arrhythmia
+                peakAmpR = DWTsignalPeaks{i,1}(end);
+                if(length(DWTsignalPeaks{i,1}) > 3)
+                    peakIntervalRR = DWTsignalPeaks{i,2}(end-1) - DWTsignalPeaks{i,2}(1); 
+                else 
+                    peakIntervalRR = DWTsignalPeaks{i,2}(end) - DWTsignalPeaks{i,2}(1); 
+                end
+                inst = {peakAmpR peakIntervalRR DWTsignalPeaks{i,3}};
+                features(end+1,:) = inst;
             end
         else
             continue;
