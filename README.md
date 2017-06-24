@@ -119,12 +119,12 @@ With the features extracted in a CSV, an ARFF (Attribute-Relation File Format) f
 Inside WEKA explorer, open the ARFF file (4types.arff) in the preprocess tab:
 
 ![WEKA preprocess tab with 4types.arff loaded file]
-https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Article/final/img/preprocess_4types_file.png)
+(https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Article/final/img/preprocess_4types_file.png)
 
 After the file was loaded, the machine learning process can be instantiated with a classifier option (Bayesian Networks, Neural Networks, Trees and others) and a test option. In this project, two classifiers were choosen to test (ANN and Random Forest) with a percentage split of 80% (80% of the data to training and the 20% rest to testing):
 
 ![WEKA preprocess tab with 4types.arff loaded file]
-https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Article/final/img/process_classifier_test_options.png)
+(https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Article/final/img/process_classifier_test_options.png)
 
 With the test evaluation (split instances and confusion matrix) results, the ECG arrhythmia extraction and analysis were well evaluated for the Random Forest algorithm, while for the ANN algorithm the results weren't quite expected.
 
