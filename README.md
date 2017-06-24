@@ -100,11 +100,15 @@ arrhythmiaPeriods = readArrythmiaPeriods(type, filepath);
 arrhythmiaMultipleQRS = extractMultipleQRS(arrhythmiaPeriods, sizeEcgSig, timeEcgSig, ecgsig, tmSeg, filename, type);
 ```
 
+![Extracted QRS window for Trigeminy Ventricular arrhythmia sample](https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Code/graphs/201m/T-example1-201m.png)
+
 4) Decompose the windowed-signal into time-varying frequency (scale) components with MODWT and IMODWT and extract the signal peaks amplitude and locations (feature characteristics). This command will also plot and save in /matlab folder a PNG image for each plot - for any arrhythmias cases except Normal Sinus Rhythm (N):
 
 ```
 DWTsignalPeaks = extractDWTsignalPeaks(arrhythmiaMultipleQRS, 0.5, 0.150, filename, type);
 ```
+
+![Extracted signal peaks for Trigeminy Ventricular arrhythmia sample transformed with DWT](https://raw.githubusercontent.com/davikawasaki/arrhythmia-ecg-analysis-pds/master/Code/graphs/201m/T-peaks1-201m.png)
 
 5) Lastly, extract the ECG features from the DWTsignalPeaks to a CSV or to another variable:
 
