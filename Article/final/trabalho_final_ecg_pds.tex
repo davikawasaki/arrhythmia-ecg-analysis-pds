@@ -434,9 +434,9 @@ Por meio dessas válvulas é possível realizar o processamento do oxigênio e d
 	\label{coracaoEsquematico}
 \end{figure}
 
-Uma das estruturas internas primordial para determinar o ritmo do coração chama-se nódulo sinoatrial (SA), ou também chamado de marca-passo. Localizada entre o átrio direito e a veia cava superior, ele atua controlando a frequência dos batimentos cardíacos, com cerca de 72 contrações por minuto. Por ter uma frequência alta, seus impulsos se espalham para os átrios e ventrículos, excitando todas as áreas e determinando o ritmo de batimento de quase todo o coração  \cite{guyton06}.
+Uma das estruturas internas primordiais para determinar o ritmo do coração chama-se nódulo sinoatrial (SA), ou também chamado de marca-passo. Localizada entre o átrio direito e a veia cava superior (vide Figura \ref{coracaoEsquematico}), ele atua controlando a frequência dos batimentos cardíacos, com cerca de 72 contrações por minuto. Por ter uma frequência alta, seus impulsos se espalham para os átrios e ventrículos, excitando todas as áreas e determinando o ritmo de batimento de quase todo o coração  \cite{guyton06}.
 
-O coração, por meio do seu batimento, realiza vários eventos cardíacos chamados de ciclos cardíacos, começando pela geração de um potencial de ação propagado pelos átrios até chegar nos ventrículos. Esse ciclo cardíaco vai conter o relaxamento pela diástole (coração enche de sangue) e a sístole (contração das câmaras de bombeamento). Conforme representado pelos traçados da Figura \ref{eventosCicloCardiaco}, pode-se visualizar os períodos de pressão (mm Hg), volume (ml), eletrocardiograma, fonocardiograma, sendo o penúltimo a representação gráfica utilizada nesse trabalho para classificação de arritmias.
+O coração, por meio do seu batimento, realiza vários eventos cardíacos chamados de ciclos cardíacos, começando pela geração de um potencial de ação propagado pelos átrios até chegar nos ventrículos. Esse ciclo cardíaco vai conter o relaxamento pela diástole (coração enche de sangue) e a sístole (contração das câmaras de bombeamento). Conforme representado pelos traçados da Figura \ref{eventosCicloCardiaco}, pode-se visualizar os períodos de pressão (mm Hg), volume (ml), eletrocardiograma e fonocardiograma, sendo o penúltimo a representação gráfica utilizada nesse trabalho para classificação de arritmias.
 
 \begin{figure}[!h]
 	\centering
@@ -467,7 +467,7 @@ Um registro de ECG, representado na Figura \ref{eletrocardiogramaIntervalos}, é
 	\label{eletrocardiogramaIntervalos}
 \end{figure}
 
-Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada das cardiopatias, como o intervalo entre a onda P e R que representa o tempo de condução do estímulo através do nódulo atrioventricular; e o complexo QRS, que representa a despolarização ventricular. A partir desses subperíodos pode-se analisar as morfologias do exame, denominadas pela sequência de excitação e recuperação, respectivamente caracterizados pela despolarização e repolarização por meio da
+Além dos formatos de onda, o ECG apresenta alguns subperíodos que são importantes para uma análise mais detalhada das cardiopatias, como o intervalo entre a onda P e R, o qual representa o tempo de condução do estímulo através do nódulo atrioventricular; e o complexo QRS, que representa a despolarização ventricular. A partir desses subperíodos pode-se analisar as morfologias do exame, denominadas pela sequência de excitação e recuperação, respectivamente caracterizados pela despolarização e repolarização por meio da
 diferença de potencial resultante, conforme representado pela Figura \ref{sequenciaDespolarizacacoPolarizacao}.
 
 \begin{figure}[!h]
@@ -477,13 +477,17 @@ diferença de potencial resultante, conforme representado pela Figura \ref{seque
 	\label{sequenciaDespolarizacacoPolarizacao}
 \end{figure}
 
-Estas morfologias permitem a verificação de anormalidades no sistema de condução cardíaca, como as arritmias que vão ser extraídas por meio das redes neurais nesse trabalho.
+Estas morfologias permitem a verificação de anormalidades no sistema de condução cardíaca, como as arritmias que vão ser classificadas por meio de aprendizado de máquina nesse trabalho.
 
 \subsection{Arritmias}
 
-Conforme apresentado, os exames de ECG permitem identificar anormalidades no sistema cardiológico, podendo representar diferentes cardiopatias. Essas cardiopatias podem ser sintomaticamente representadas por arritmias cardíacas, que ocorrem por alterações na formação/condução do impulso elétrico através do miocárdio \cite{sbc03}. O ECG é um dos principais exames para estudo e análise das arritmias justamente porque as mesmas podem modificar a origem/difusão fisiológica do estímulo elétrico, alterando o ritmo cardíaco normal \cite{goncalves95}.
+Conforme apresentado, os exames de ECG permitem identificar anormalidades no sistema cardiológico, podendo representar diferentes cardiopatias. Elas podem ser sintomaticamente representadas por arritmias cardíacas, que ocorrem por alterações na formação/condução do impulso elétrico através do miocárdio \cite{sbc03}. O ECG é um dos principais exames para estudo e análise das arritmias, justamente porque as mesmas podem modificar a origem/difusão fisiológica do estímulo elétrico, alterando o ritmo cardíaco normal \cite{goncalves95}.
 
 Dentre os mais diversos tipos de classificação de arritmias, elas podem ser divididas em duas categorias (assintomáticas e sintomáticas) e em dois grupos de frequência: bradicardia - frequência cardíaca menor que 60 batimentos por segundo, e taquicardia - frequência cardíaca maior que 100 batimentos por segundo \cite{guyton06}.
+
+O enfoque desse trabalho reside nas arritmias que ocorrem na parte ventricular do batimento cardíaco, como as seguintes: Taquicardia Ventricular (VT), Bigeminismo Ventricular (B) e Trigeminismo Ventricular (T).
+
+A taquicardia acontece quando a frequência cardíaca é maior que 100 batimentos por minuto. Ao realizar esforços físicos sua ocorrência é considerada normal, porém após alguns minutos depois do término da atividade física, a frequência cardíaca deve se restabelecer ao nível saudável \cite{beckert09}. Quando isso não acontece ou se em repouso apresenta-se taquicardia, isto pode indicar a existência de alguma patologia, como a taquicardia ventricular representada pela Figura \ref{ecgTaquicardiaVentricular}.
 
 \begin{figure}[!h]
 	\centering
@@ -492,9 +496,20 @@ Dentre os mais diversos tipos de classificação de arritmias, elas podem ser di
 	\label{ecgTaquicardiaVentricular}
 \end{figure}
 
+Já os casos de Bigeminismo e Trigeminismo ocorrem por contrações ventriculares prematuras (PVC), onde cada PVC é seguido por uma pausa compensatória que permite que o nódulo sinoatrial descanse no ciclo, conforme representado na Figura \ref{arritmiaBigeminismoTrigeminismo}. Enquanto no bigeminismo um PVC ocorre em todas as outras batidas de forma constante, o trigeminismo consiste em um PVC ocorrendo somente na terceira batida, onde aparece uma pausa compensatória após essa batida \cite{wanderer09}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/arritmiaBigeminismoTrigeminismo}
+	\caption{Exemplo de ECG com Bigeminismo e Trigeminismo Ventricular.}
+	\label{arritmiaBigeminismoTrigeminismo}
+\end{figure}
+
 \subsection{Extração do Sinal com Janelamento}
 
-\textbf{Aqui vai a parte teórica de janelamento.}
+O tratamento de sinais normalmente envolve um conjunto grande e finito de dados, os quais devem ser tratados para realização de uma extração e sintetização adequada. Em alguns casos, principalmente envolvendo uma extração de dados com \textit{Transformada Rápida de Fourier (FFT)}, a aquisição pode resultar em sinais com transições abruptas, também conhecidas como descontinuidades \cite{ni16}. 
+
+No caso dos ECGs, os sinais possuem vários batimentos no período de 30 minutos da base de dados, onde cada tipo de batimento de arritmia ocorre em alguns momentos específicos pelo sinal. Sendo assim, sabendo cada período específico através de anotações provenientes da base de dados do MIT-BIH, a técnica de janelamento se torna útil, permitindo um enfoque específico da onda completa a ser analisada, além de minimizar possíveis margens de transição como as descontinuidades, reduzindo a perda espectral do sinal \cite{ni16}.
 
 \subsection{Processamento do Sinal com Transformadas \textit{Wavelets}}
 A \textit{Wavelet} trata-se de uma função que descreve e decompõe outras funções no domínio da frequência, garantindo a análise além do domínio do tempo. A sua decomposição acontece por meio da Transformada \textit{Wavelet}, que trata de uma técnica por dimensão de janela variável, avaliando o sinal no espaço tempo x frequência e os componentes espectrais em um intervalo de tempo \cite{graps95}.
