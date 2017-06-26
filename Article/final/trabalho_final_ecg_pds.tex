@@ -755,11 +755,22 @@ Com os 3 arquivos de 17 amostras de sinais foi possível realizar a normalizaç�
 	\label{trigeminyFeaturesExtractedCSVExample}
 \end{figure}
 
-Essas etapas apresentadas foram executadas para cada um dos 17 arquivos e para todas as arritmias, além do arquivo 100m para extração de características de um sinal saudável (N). Após a extração de todos os CSVs, organizou-se em um só arquivo com todas as características de todos tipos de arritmias, o qual foi repassado para ser inserido no aprendizado de máquina.
+Essas etapas apresentadas foram executadas para cada um dos 17 arquivos e para todas as arritmias, além do arquivo 100m para extração de características de um sinal saudável (N). Após a extração de todos os \textit{CSVs}, organizou-se em um só arquivo com todas as características de todos tipos de arritmias, o qual foi repassado para ser inserido no aprendizado de máquina.
 
 \section{Treinamento com Aprendizado de Máquina}
 
-\textbf{Aqui vai a parte do Weka.}
+Após a etapa de extração de características, foi obtido um arquivo \textit{CSV} com 1410 amostras contendo três tipos de arritmia: Bigeminismo Ventricular, Trigeminismo Ventricular e Taquicardia Ventricular. Para realizar o treinamento no conjunto de dados obtidos, foi utilizado o \textit{software} WEKA, o qual disponibiliza diversos algoritmos de inteligência artificial já implementados. 
+
+Neste momento, foi necessário a conversão do arquivo \textit{CSV} com os dados normalizados para o formato \textit{ARFF}, permitindo a execução de leituras das amostras de forma correta pelo \textit{WEKA}. O arquivo \textit{ARFF} é formado por um cabeçalho, o qual deve declarar as variáveis que cada amostra irá apresentar com seu respectivo tipo. As amostras são colocadas logo abaixo desse cabeçalho, com variáveis separadas por vírgula - representado pela Figura \ref{wekaArquive}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/wekaArquive}
+	\caption{Cabeçalho do arquivo \textit{ARFF} criado para o treinamento.}
+	\label{wekaArquive}
+\end{figure}
+
+Com o arquivo \textit{ARFF} criado, foi necessário carregar o arquivo e escolher o classificador desejado para realização do treinamento. Para este trabalho foram utilizado dois tipos de classificadores: \textit{Random Forest e Artificial Neural Networks}. O resultado do desempenho de cada algoritmo pode ser visualizado respectivamente através das Figuras \ref{wekaResultANN8020} e \ref{wekaResultRandomForest8020}.
 
 \begin{figure}[!h]
 	\centering
@@ -798,7 +809,7 @@ A partir dos resultados de acurácia apresentados através da Tabela \ref{table:
 	%% than the plain LaTeX2e tabular which is used here.
 	\begin{tabular}{|c|c|c|}
 		\hline
-		\textbf{Tipo de Arritmia} & \textbf{Redes Neurais} & \textbf{\textit{Random Forest}}\\
+		\textbf{Tipo de Arritmia} & \textbf{\textit{Artificial Neural Networks}} & \textbf{\textit{Random Forest}}\\
 		\hline
 		(B & 100\% & 81,8\% \\		
 		\hline
