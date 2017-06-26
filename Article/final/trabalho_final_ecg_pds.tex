@@ -409,7 +409,7 @@ Com o crescimento do número de pacientes dentre a volumosa população mundial,
 
 Sob essa análise contextual, esse trabalho propõe formular um algoritmo que seja capaz de detectar, analisar e classificar automaticamente essas arritmias cardíacas. Conforme a análise literária \cite{beckert09}, algoritmos que realizam esse trabalho dificilmente alcançam taxas de 100\% de acerto. Para ultrapassar essa barreira, um método será desenvolvido para analisar o sinal de ECG, extrair características relevantes do mesmo e, por fim, classificar cada um dos sinais por dois tipos de Aprendizado de Máquina: Redes Neurais e Árvores de Decisão. Os sinais serão obtidos diretamente da base de dados \textit{MIT-BIH} - \textit{Arrhythmia Database}, e o foco de classificação dessa base serão sinais de ECG normais ou possuidor de um dos três tipos de arritmias ventriculares: Taquicardia Ventricular (VT), Bigeminismo Ventricular (B) e Trigeminismo Ventricular (T).
 
-Por meio da normalização e filtro dos sinais, pretende-se avaliar os resultados através da taxa de confiabilidade do aprendizado de máquina com o \textit{software} WEKA, além de comparar com resultados de outros trabalhos. 
+Por meio da normalização e filtro dos sinais, pretende-se avaliar os resultados através da taxa de acurácia do aprendizado de máquina com o \textit{software} WEKA, além de analisar a contribuição da extração dos resultados no resultado do aprendizado de máquina. 
 
 O trabalho, portanto, é dividido em: Introdução, Fundamentação Teórica, Metodologia, Extração de Características, Treinamento com Aprendizado de Máquina, Resultados e Discussões, Conclusão.
 
@@ -659,6 +659,8 @@ A partir do sinal normalizado e tratado, realizou-se a extração de duas caract
 
 Por fim, com os arquivos contendo as características extraídas dos sinais normalizados, foi possível realizar o aprendizado de máquina com o \textit{software WEKA}. Para fim de validação de qual método seria mais eficaz, foi realizado uma comparação entre o treinamento com um algoritmo de Redes Neurais e outro de Árvores de Decisão, utilizando 80\% da base de dados como treinamento e 20\% como teste.
 
+Todo o código desenvolvido e resultados obtidos apresentados nesse trabalho podem ser acessados através do repositório aberto utilizado no \textit{Github} \cite{kawasaki17}.
+
 % An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table and, given that table
 % captions serve much like titles, are usually capitalized except for words
@@ -809,29 +811,33 @@ A partir dos resultados de acurácia apresentados através da Tabela \ref{table:
 	\end{tabular}
 \end{table}
 
-\section{Conclus\~ao}
+\section{Conclusão}
 
-\textbf{Precisa melhorar a conclusão.}
+O tratamento de pacientes tem sido uma preocupação global, onde cada vez mais pessoas precisam ser diagnosticadas por uma porcentagem pequena de médicos extremamente ocupados. Sendo assim, métodos automáticos de diagnósticos têm sido desenvolvidos para auxiliar profissionais da saúde, principalmente em áreas que ainda não foram totalmente "convertidas" para o meio digital.
 
-Como apresentado anteriormente, o objetivo desse trabalho \'e realizar n\~ao apenas a conex\~ao entre dois m\'odulos de r\'adio frequ\^encia, mas principalmente realizar a an\'alise dos pacotes e dados enviados, verificando poss\'iveis erros e perdas. Nesse quesito, o projeto deve apresentar, em sua entrega e apresenta\c{c}\~ao, a transmiss\~ao de pacotes de dados em tempo real e a gera\c{c}\~ao de gr\'aficos e dados estat\'isticos que possam ilustrar a situa\c{c}\~ao real dessa transfer\^encia sob diferentes aspectos do meio.
+Nesse contexto, uma das áreas que tem evoluído com vários trabalhos e artigos consiste em exames cardiológicos \cite{beckert09}  \cite{barrella14} \cite{manzan06}, que normalmente são manuais e ainda analógicos, dependentes da avaliação final de um profissional médico.
 
-Caso seja poss\'ivel, o projeto tamb\'em pode visar o tratamento desses dados diretamente nos atuadores, visualizando poss\'iveis situa\c{c}\~oes que possam corrigir e inibir erros e atenua\c{c}\~oes que influenciam e impedem o tr\'afego dos dados da melhor maneira poss\'ivel.
+O objetivo desse trabalho, portanto, foi contribuir no diagnóstico automático e digital de arritmias em um exame de ECG, auxiliando o processo decisório de um profissional de cardiologia. Por meio da extração de características cardíacas de sinais específicos, foi possível realizar um aprendizado de máquina, conseguindo treinar uma inteligência artificial para identificação de três arritmias baseado nas características disponibilizadas.
 
-%O projeto tamb\'em poder\'a trabalhar com os seguintes artigos, dependendo do n\'ivel de desenvolvimento do estudo: \cite{performanceAnalysisNRF24L01}, \cite{efficientRFPowerTransfer} e \cite{selectionOpticalWavelengthDataTransmission}.
+Conforme apresentado no tópico anterior, a extração e treinamento conseguiram apresentar resultados satisfatórios, principalmente para o algoritmo de treinamento \textit{Random Forest}. O trabalho, portanto, apresentou uma alternativa rápida e inicial para um diagnóstico cardíaco. Contudo, alguns pontos podem ter comprometido o trabalho, e podem contribuir para trabalhos futuros:
 
+1. A falta de quantidade de amostras de arritmias pode ter influenciado no resultado, dado que a grande maioria das amostras eram do tipo Normal (254 na parte de teste, por exemplo). A base de dados de arritmias do MIT-BIH pode ser aprimorada, contendo uma maior quantidade de sinais com mais ocasiões de arritmias.
+
+2. A estratégia de extração do complexo QRS por janelamento pode ter comprometido a qualidade da acurácia do treinamento, dado que nesse trabalho não foram identificados os diferentes tipos de onda de um batimento de ECG. Ou seja, para trabalhos futuros uma extração das ondas P, QRS, T podem melhorar a qualidade do trabalho, assim como conseguir identificar outros tipos de arritmias - como o caso da Fibrilação Atrial, que ocorre na despolarização atrial da onda P.
+
+3. A estratégia de coleta dos picos precisa ser aprimorada, dado que cada tipo de arritmia pode caracterizar uma quantidade de picos diferentes, ou até picos falsos que podem comprometer a extração adequada para treinamento.
+
+4. A quantidade de características cardíacas extraídas para treinamento também pode ter influenciado o resultado, dado que aprendizado de máquina possui uma maior eficiência com uma grande quantidade de amostras e características relevantes ao estudo empregado. Sendo assim, um possível aprimoramento poderia ser a extração de outras características, como: amplitude mínima da onda R, média e raiz quadrada da amplitude, derivada máxima da amplitude e seu período (captura a velocidade da onda R), e derivada absoluta média \cite{barrella14}.
+
+Por fim, esse trabalho foi importante para contribuir ainda mais com o conhecimento médico digital, oferecendo uma solução alternativa para uma evolução de diagnósticos cardiológicos.
 
 % conference papers do not normally have an appendix
 
 
 % use section* for acknowledgment
-%\section*{Acknowledgment}
+\section*{Agradecimentos}
 
-
-%The authors would like to thank...
-
-
-
-
+Os autores gostariam de agradecer o prof. Danilo Hernane Spatti pela supervisão e orientação na elaboração desse projeto.
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
