@@ -759,9 +759,29 @@ Essas etapas apresentadas foram executadas para cada um dos 17 arquivos e para t
 
 \textbf{Aqui vai a parte do Weka.}
 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/wekaResultANN8020}
+	\caption{Resultados do treinamento com Redes Neurais no \textit{software WEKA}.}
+	\label{wekaResultANN8020}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/wekaResultRandomForest8020}
+	\caption{Resultados do treinamento com Árvores de Decisão no \textit{software WEKA}.}
+	\label{wekaResultRandomForest8020}
+\end{figure}
+
 \section{Resultados e Discussões}
 
-\textbf{Aqui vai a discussão de resultados.}
+A partir dos resultados obtidos com o aprendizado de máquina, foi possível analisar a eficiência do método de extração de características e dos algoritmos de aprendizado na área de ECG.
+
+Conforme pode ser visualizado nos resultados do treinamento com Redes Neurais - representado pela Figura \ref{wekaResultANN8020} - a arritmia do tipo Bigeminismo Ventricular e os casos normais (sem arritmia) foram classificadas com eficiência nos testes, enquanto as arritmias do tipo Trigeminismo e Taquicardia Ventricular não foram classificadas adequadamente. Com esses resultados, algumas considerações podem ser feitas: o método de normalização e extração de características pelo \textit{software MATLAB} foi extremamente eficiente no caso do Bigeminismo e do tipo Normal, demonstrando que precisa ser aprimorado para extração das características dos outros dois tipos de arritmia; a outra consideração pode estar presente na quantidade de características extraídas, as quais podem não ter sido suficientes para classificação dos tipos Trigeminismo e Taquicardia Ventricular.
+
+Em contraposição, os resultados do treinamento com Árvores de Decisão - representado pela Figura \ref{wekaResultRandomForest8020} - demonstram um treinamento e teste eficiente, com classificação correta de cada tipo de arritmia, onde os casos de Bigeminismo e Trigeminismo Ventricular apresentam apenas duas classificações erradas nos testes.
+
+A partir dos resultados apresentados, foi possível verificar que, com as características extraídas para testes de ECG, o aprendizado de máquina utilizando o algoritmo de Árvores de Decisão \textit{Random Forest} apresentou-se como mais adequado para utilização, apesar da baixa quantidade de amostras.
 
 \section{Conclus\~ao}
 
