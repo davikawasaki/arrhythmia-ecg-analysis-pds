@@ -757,7 +757,18 @@ Essas etapas apresentadas foram executadas para cada um dos 17 arquivos e para t
 
 \section{Treinamento com Aprendizado de Máquina}
 
-\textbf{Aqui vai a parte do Weka.}
+Após a etapa de extração de características, foi obtido um arquivo CSV com 1410 amostras contendo três tipos de arritmia: Bigeminismo Ventricular, Trigeminismo Ventricular e Taquicardia Ventricular. Para realizar o treinamento no conjunto de dados obtidos, foi utilizado o \textit{software} WEKA, que disponibiliza diversos algoritmos de inteligência artificial já implementados. 
+
+Neste momento, foi necessário a conversão do arquivo CSV com os dados normalizados, para o formato ARFF, para o que o WEKA pudesse executar as leituras das amostras de forma correta. O arquivo ARFF é formado por um cabeçalho, em que é necessário declarar as variáveis que cada amostra irá apresentar, com seu respectivo tipo. As amostras são colocadas logo abaixo, e tem suas variáveis separadas por vírgula, como pode ser visualizado na Figura \ref{wekaArquive}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/wekaArquive}
+	\caption{Cabeçalho do arquivo ARFF criado.}
+	\label{wekaArquive}
+\end{figure}
+
+Com o arquivo ARFF criado, foi necessário carregar o arquivo e escolher o classificar no qual se deseja realizar o treinamento. Para este trabalho foi utilizado dois tipos de classificadores: \textit{Random Forest e Artificial Neural Networks}. O resultado do desempenho de cada algoritmo pode ser visualizado nas Figuras \ref{wekaResultANN8020} e \ref{wekaResultRandomForest8020}.
 
 \begin{figure}[!h]
 	\centering
