@@ -543,9 +543,9 @@ O primeiro passo necessário para a classificação de sinais se encontra na nor
 
 \subsection{Aprendizado de Máquina}
 
-O aprendizado de máquina se caracteriza por ser um subcampo dentro de toda a inteligência artificial, e tem o objetivo de desenvolver algoritmos e técnicas que permitam os computadores adquirirem conhecimento sem serem explicitamente programados. Dado um conjunto de amostras cujo tenha classificação conhecida, a máquina conseguem interpretar os dados e classificá-los, aprendendo com seus erros. \cite{morellato08}As técnicas do aprendizado de máquina podem ser aplicadas em diversas áreas do conhecimento, como em problemas relacionados a computação, biologia, química e matemática.\cite{morellato08}
+O aprendizado de máquina se caracteriza por ser um subcampo dentro de toda a inteligência artificial, e tem o objetivo de desenvolver algoritmos e técnicas que permitam os computadores adquirirem conhecimento sem serem explicitamente programados. Dado um conjunto de amostras cujo tenha classificação conhecida, a máquina conseguem interpretar os dados e classificá-los, aprendendo com seus erros \cite{morellato08}. As técnicas do aprendizado de máquina podem ser aplicadas em diversas áreas do conhecimento, como em problemas relacionados a computação, biologia, química e matemática \cite{morellato08}.
 
-Os algoritmos de aprendizados de máquinas podem ser divididos em dois principais tipos: os supervisionados e não supervisionados. O aprendizado de máquina supervisionado trata de amostras no qual foram fornecidas uma referência do objetivo, disponibilizando para o computador informações a respeito do ambiente em que as amostras pertencem.\cite{marr2017} Neste tipo de aprendizado, em cada amostra é fornecida variáveis de entrada e a saída esperada, também chamada de \textit{true label}. Ao final do treinamento, é esperado que a máquina seja capaz de fornecer saídas corretas para entradas que nunca foram apresentadas. O aprendizado de máquina não supervisionado não contém o \textit{true label}, tendo amostras compostas apenas pelas variáveis de entrada.Com isso, os algoritmos não supervisionadas tentam encontrar padrões nas amostras fornecidas, separando-as em grupos.\cite{marr2017}
+Os algoritmos de aprendizados de máquinas podem ser divididos em dois principais tipos: os supervisionados e não supervisionados. O aprendizado de máquina supervisionado trata de amostras no qual foram fornecidas uma referência do objetivo, disponibilizando para o computador informações a respeito do ambiente em que as amostras pertencem \cite{marr2017}. Neste tipo de aprendizado, em cada amostra é fornecida variáveis de entrada e a saída esperada, também chamada de \textit{true label}. Ao final do treinamento, é esperado que a máquina seja capaz de fornecer saídas corretas para entradas que nunca foram apresentadas. O aprendizado de máquina não supervisionado não contém o \textit{true label}, tendo amostras compostas apenas pelas variáveis de entrada.Com isso, os algoritmos não supervisionadas tentam encontrar padrões nas amostras fornecidas, separando-as em grupos \cite{marr2017}.
 
 \textbf{Abaixo vai a parte de redes neurais.}
 
@@ -646,7 +646,15 @@ Para classificar o sinal normalizado será utilizado o \textbf{algoritmo ?????}.
 
 \section{Metodologia}
 
-Aqui vai a metodologia na Tabela \ref{table:cronogramaProjeto}.
+A partir da proposta e fundamentação teórica apresentada, pode-se determinar quais ferramentas utilizadas e qual metodologia empregada no projeto. 
+
+O projeto foi desenvolvido em duas etapas: primeiro o tratamento do sinal para extração de características, e depois o treinamento das arritmias por aprendizado de máquina.
+
+O objetivo do tratamento do sinal foi isolar partes do sinal do ECG por janelamento para, consequentemente, conseguir aplicar \textit{Transformadas Wavelets Discretas} para filtro e redução de ruídos. Através do \textit{software MATLAB}, o janelamento de períodos do sinal foi realizado através de arquivos de anotações da base de dados de arritmia, as quais possuíam exatos períodos de tempo onde a arritmia a ser verificada ocorria.
+
+A partir do sinal normalizado e tratado, realizou-se a extração de duas características cardíacas importantes para posterior treinamento: amplitude da onda R em milivolts (mV) e intervalo de tempo entre ondas R em segundos (seg). Esses dados foram extraídos em arquivos do tipo CSV juntamente com um \textit{true label}, variável a qual caracteriza o tipo de arritmia.
+
+Por fim, com os arquivos contendo as características extraídas dos sinais normalizados, foi possível realizar o aprendizado de máquina com o \textit{software WEKA}. Para fim de validação de qual método seria mais eficaz, foi realizado uma comparação entre o treinamento com um algoritmo de Redes Neurais e outro de Árvores de Decisão, utilizando 80\% da base de dados como treinamento e 20\% como teste.
 
 % An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table and, given that table
@@ -658,37 +666,37 @@ Aqui vai a metodologia na Tabela \ref{table:cronogramaProjeto}.
 % The \label must come after \caption as always.
 %
 
-\renewcommand\tablename{TABELA}
-\begin{table}[!h]
+%\renewcommand\tablename{TABELA}
+%\begin{table}[!h]
 %% increase table row spacing, adjust to taste
-\renewcommand{\arraystretch}{1.3}
+%\renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Cronograma de Tópicos Trabalhados do Projeto}
-\label{table:cronogramaProjeto}
-\centering
+%\caption{Cronograma de Tópicos Trabalhados do Projeto}
+%\label{table:cronogramaProjeto}
+%\centering
 %% Some packages, such as MDW tools, offer better commands for making tables
 %% than the plain LaTeX2e tabular which is used here.
-\begin{tabular}{|c|c|}
-\hline
-Semana 01/05 & Estudo do contexto do artigo\\
-\hline
-Semana 08/05 & Estudo de ECG e extração dos dados\\
-\hline
-Semana 15/05 & Estudo de transformada \textit{Wavelet}\\
-\hline
-Semana 22/05 & Estudo da aplicação de Redes Neurais e Algoritmos\\
-\hline
-Semana 29/05 & Extração e Classificação dos Sinais com \textit{Wavelet}\\
-\hline
-Semana 05/06 & Execução dos Aprendizados Supervisionados\\
-\hline
-Semana 12/06 & Análise dos Aprendizados e Geração do Relatório\\
-\hline
-Semana 19/06 & Finalização do Relatório e Apresentação Final\\
-\hline
-\end{tabular}
-\end{table}
+%\begin{tabular}{|c|c|}
+%\hline
+%Semana 01/05 & Estudo do contexto do artigo\\
+%\hline
+%Semana 08/05 & Estudo de ECG e extração dos dados\\
+%\hline
+%Semana 15/05 & Estudo de transformada \textit{Wavelet}\\
+%\hline
+%Semana 22/05 & Estudo da aplicação de Redes Neurais e Algoritmos\\
+%\hline
+%Semana 29/05 & Extração e Classificação dos Sinais com \textit{Wavelet}\\
+%\hline
+%Semana 05/06 & Execução dos Aprendizados Supervisionados\\
+%\hline
+%Semana 12/06 & Análise dos Aprendizados e Geração do Relatório\\
+%\hline
+%Semana 19/06 & Finalização do Relatório e Apresentação Final\\
+%\hline
+%\end{tabular}
+%\end{table}
 
 \section{Extração de Características}
 
