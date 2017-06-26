@@ -703,7 +703,57 @@ Por fim, com os arquivos contendo as características extraídas dos sinais norm
 
 \section{Extração de Características}
 
-\textbf{Aqui vai a parte de PDS com Matlab.}
+Conforme apresentado no tópico anterior, a normalização de sinal e extração de características foram realizadas através do \textit{software MATLAB}. Essa etapa foi fundamental para que fosse elaborado um algoritmo modular e completo, capaz de realizar desde o janelamento do sinal até a extração das características para o treinamento com aprendizado de máquina, o qual será detalhado no próximo tópico.
+
+Para uma melhor compreensão desse algoritmo, é necessário compreender o funcionamento da base de dados de arritmia do MIT-BIH. A base conta com 48 amostras de diferentes pessoas, sendo que cada uma das amostras possui uma duração de aproximadamente 30 minutos e com janelas aleatórias de diferentes tipos de arritmias. Para cada amostra é possível realizar a extração de vários tipos de arquivos, onde nesse trabalho três tipos foram focados: extração do sinal com uma faixa (potencial MLII, derivado do tipo V2) em um arquivo .mat, extração de informações do sinal completo em um arquivo .info e, por fim, extração de detalhes de cada período de sinal com os tipos de arritmias - provenientes de considerações de profissionais cardiologistas - em um arquivo .txt. Um exemplo do arquivo de anotações pode ser visualizado através da Figura \ref{ecgSignalAnnotationsExample}, onde é possível visualizar um tipo de arritmia do tipo Bigeminismo (B no período 0:00.186 ou na amostra 67 do sinal.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/ecgSignalAnnotationsExample}
+	\caption{Exemplo de anotações extraídas do sinal ECG 100m dentro do site da Physionet ATM.}
+	\label{ecgSignalAnnotationsExample}
+\end{figure}
+
+Com os 3 arquivos de 17 amostras de sinais foi possível realizar a normalização e extração das 3 arritmias propostas através de 6 etapas realizadas no \textit{MATLAB} para cada uma das 17 amostras:
+
+1. A primeira etapa consistiu em carregar cada um dos 17 sinais de ECG, extraindo os valores elétricos em amplitude e tempo, além da frequência, quantidade de amostras e tempo total do sinal.
+
+2. Em seguida, realizou-se a leitura do arquivo de anotações dos sinais, capturando em um objeto de vetores os períodos e tempos das amostras da arritmia escolhida para extração.
+
+3. Com cada um dos períodos específicos das arritmias, foi possível realizar o janelamento da parte QRS de cada onda, capturando um intervalo de tempo anterior e posterior a amostra de tempo da arritmia extraída na etapa anterior. 
+
+4. Após a extração do sinal em amplitude e tempo em um objeto de vetores do janelamento, realiza-se a plotagem de cada sinal QRS extraído, exceto para casos sem arritmia - chamados de \textit{Normal Sinus Rhythm (N)}. Uma extração do janelamento da parte QRS do arquivo 201m pode ser visualizada na Figura \ref{signalQRSExtractedTrigeminy}, onde foi extraída arritmia Trigeminismo Ventricular.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/signalQRSExtractedTrigeminy}
+	\caption{Sinal QRS de Trigeminismo Ventricular extraído por janelamento do arquivo 201m.}
+	\label{signalQRSExtractedTrigeminy}
+\end{figure}
+
+5. Com as janelas dos sinais separados em objeto de vetores realiza-se a decomposição de cada sinal janelado em componentes de frequência variantes no tempo com Transformada \textit{Wavelet} Discreta de Sobreposição Máxima (MODWT) e Transformada \textit{Wavelet} Discreta Inversa de Sobreposição Máxima (IMODWT) na escala 3 - funções disponíveis através do \textit{Wavelet Toolbox} do \textit{software MATLAB}.
+
+5. Após a extração do sinal modulado e filtrado com \textit{Transformada Wavelet Discreta}, realizou-se a extração da amplitude e tempo dos picos do sinal janelado através da função \textbf{findpeaks} do \textit{Signal Processing Toolbox}.
+
+6. Após a extração dos picos em um objeto de vetores, realiza-se a plotagem de cada sinal com seus respectivos pontos de pico, exceto para casos sem arritmia (N). Uma extração do picos do arquivo 201m pode ser visualizada na Figura \ref{signalPeaksExtractedTrigeminy}, onde foi extraída arritmia Trigeminismo Ventricular.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/signalPeaksExtractedTrigeminy}
+	\caption{Picos de Trigeminismo Ventricular extraídos do arquivo 201m.}
+	\label{signalPeaksExtractedTrigeminy}
+\end{figure}
+
+7. Por fim, com os dados de amplitude e tempo extraídos em um objeto de vetores, realizou-se a extração de características, capturando o valor de amplitude do último pico do sinal e a diferença de tempo R-R entre o último e o primeiro pico (o pico do meio não se caracteriza como pico R). Após a manipulação desses dados, realiza-se a extração dessas duas características com o tipo da arritmia em um arquivo CSV, populando cada linha do arquivo com cada período de amostra encontrado para a arritmia escolhida. Um arquivo CSV extraído para o Trigeminismo Ventricular pode ser visualizado na Figura \ref{trigeminyFeaturesExtractedCSVExample}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3in]{img/trigeminyFeaturesExtractedCSVExample}
+	\caption{Arquivo de características extraído para Trigeminismo Ventricular referentes ao arquivo 201m.}
+	\label{trigeminyFeaturesExtractedCSVExample}
+\end{figure}
+
+Essas etapas apresentadas foram executadas para cada um dos 17 arquivos e para todas as arritmias, além do arquivo 100m para extração de características de um sinal saudável (N). Após a extração de todos os CSVs, organizou-se em um só arquivo com todas as características de todos tipos de arritmias, o qual foi repassado para ser inserido no aprendizado de máquina.
 
 \section{Treinamento com Aprendizado de Máquina}
 
