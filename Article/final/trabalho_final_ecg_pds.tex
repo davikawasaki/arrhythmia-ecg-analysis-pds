@@ -781,7 +781,33 @@ Conforme pode ser visualizado nos resultados do treinamento com Redes Neurais - 
 
 Em contraposição, os resultados do treinamento com Árvores de Decisão - representado pela Figura \ref{wekaResultRandomForest8020} - demonstram um treinamento e teste eficiente, com classificação correta de cada tipo de arritmia, onde os casos de Bigeminismo e Trigeminismo Ventricular apresentam apenas duas classificações erradas nos testes.
 
-A partir dos resultados apresentados, foi possível verificar que, com as características extraídas para testes de ECG, o aprendizado de máquina utilizando o algoritmo de Árvores de Decisão \textit{Random Forest} apresentou-se como mais adequado para utilização, apesar da baixa quantidade de amostras.
+A partir dos resultados de acurácia apresentados através da Tabela \ref{table:tabelaResultadosAprendizadoMaquina}, foi possível verificar que, com as características extraídas para testes de ECG, o aprendizado de máquina utilizando o algoritmo de Árvores de Decisão \textit{Random Forest} apresentou-se como mais adequado para utilização, com pior caso para Bigeminismo com 81,8\%. Os resultados apresentados provavelmente poderiam ser melhores se fossem realizados com uma maior quantidade de amostras tanto para treinamento quanto para teste.
+
+\renewcommand\tablename{TABELA}
+\begin{table}[!h]
+	%% increase table row spacing, adjust to taste
+	\renewcommand{\arraystretch}{1.3}
+	% if using array.sty, it might be a good idea to tweak the value of
+	% \extrarowheight as needed to properly center the text within the cells
+	\caption{Resultados de Acurácia para Aprendizado de Máquina utilizando Rede Neural e Árvores de Decisão}
+	\label{table:tabelaResultadosAprendizadoMaquina}
+	\centering
+	%% Some packages, such as MDW tools, offer better commands for making tables
+	%% than the plain LaTeX2e tabular which is used here.
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Tipo de Arritmia} & \textbf{Redes Neurais} & \textbf{\textit{Random Forest}}\\
+		\hline
+		(B & 100\% & 81,8\% \\		
+		\hline
+		(N & 99,6\% & 99,6\% \\		
+		\hline
+		(T & 41,7\% & 83,3\% \\		
+		\hline
+		(VT & 0\% & 100\% \\		
+		\hline
+	\end{tabular}
+\end{table}
 
 \section{Conclus\~ao}
 
