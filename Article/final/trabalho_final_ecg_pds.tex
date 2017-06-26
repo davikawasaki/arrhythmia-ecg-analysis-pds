@@ -547,7 +547,6 @@ O aprendizado de máquina se caracteriza por ser um subcampo dentro de toda a in
 
 Os algoritmos de aprendizados de máquinas podem ser divididos em dois principais tipos: os supervisionados e não supervisionados. O aprendizado de máquina supervisionado trata de amostras no qual foram fornecidas uma referência do objetivo, disponibilizando para o computador informações a respeito do ambiente em que as amostras pertencem \cite{marr2017}. Neste tipo de aprendizado, em cada amostra é fornecida variáveis de entrada e a saída esperada, também chamada de \textit{true label}. Ao final do treinamento, é esperado que a máquina seja capaz de fornecer saídas corretas para entradas que nunca foram apresentadas. O aprendizado de máquina não supervisionado não contém o \textit{true label}, tendo amostras compostas apenas pelas variáveis de entrada.Com isso, os algoritmos não supervisionadas tentam encontrar padrões nas amostras fornecidas, separando-as em grupos \cite{marr2017}.
 
-\textbf{Abaixo vai a parte de redes neurais.}
 
 O cérebro em alguns aspectos possui características similares a um processador. Por exemplo, quando lemos um texto as células fotorreceptoras dos nossos olhos captam um conjunto de símbolos e os transformam em sinais elétricos, que por sua vez, serão processados pelo cérebro para classificá-los em palavras. As redes neurais artificiais (RNAs) consistem em uma metodologia para resolver problemas de inteligência artificial que se espelham em conceitos das rede neurais naturais (RNN). O comportamento de aprendizagem da RNA é igual ao da RNN, ou seja, aprendendo, errando e fazendo descobertas. As unidades de processamento são chamadas neurônios, que são compostos basicamente por dendritos, axônio e corpo celular \cite{kovacs96}. A relação entre um neurônio natural e um \textit{Perceptron} ou neurônio booleano foi representada pela Tabela \ref{table:tabelaComparativaNeuronioPerceptron}.
 
@@ -576,7 +575,11 @@ O cérebro em alguns aspectos possui características similares a um processador
 \end{table}
 
  
-Para classificar o sinal normalizado será utilizado o \textbf{algoritmo ?????}. \textbf{Explicação dos algoritmos aqui.}
+Para classificar o sinal normalizado serão utilizados os algoritmos: \textit{Random Forest} e \textit{Artificial Neural Networks}.
+
+O algoritmo \textit{Random Forest} consiste na criação aleatória de um conjunto de árvores simples de decisão, em que cada uma delas produz uma resposta, dado um conjunto de valores apresentados previamente \cite{statsoft09}. Para a classificação de um resultado final, é verificado os resultados independentes de cada árvore gerada, realizando uma votação, em que é elegido o resultado mais votado. A classificação de cada árvore se encontra nos nós folhas de cada árvore criada \cite{dantas2015}.
+
+O algoritmo de Redes Neurais Artificiais, por sua vez, pode ser definido como técnicas computacionais que apresentam uma estrutura inspirada nas redes neurais de organismos inteligentes, que aprendem a partir de experiências \cite{carvalho09}. A estrutura de uma rede neural artificial é composta por unidades interconectadas, que representam os neurônios, em que cada um tem determinado comportamento baseado em suas entradas \cite{zuben03}. Cada neurônio artificial tem entradas que são saídas de outros neurônios. Cada entrada é multiplicada por um peso específico, sendo que esse peso indica sua influência para a saída daquela unidade. Com todos os valores de entradas calculados, é realizada uma soma ponderada, e o valor dessa soma é inserido em uma função para a normalização, gerando o valor de saída daquele neurônio. Chegando ao final da rede neural artificial, é feito o caminho contrário para atualizar os pesos das ligações de cada unidade, também chamado de \textit{backpropagation} \cite{zuben03}. O ciclo de calcular um resultado e atualizar os pesos é denominado como uma época,sendo que para  um treinamento de uma rede neural artificial é necessário várias épocas \cite{carvalho09}.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
