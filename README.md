@@ -1,3 +1,5 @@
+> This project is not supported anymore. Feel free to fork and extend it on your own.
+
 # Arrhythmia Classification through Characteristics Extraction with Discrete Wavelet Transform & Machine Learning
 
  > :warning: There is a [continuation of this project](https://github.com/davikawasaki/arrhythmia-ecg-analysis-ai), with more features extracted and supervised learning using MATLAB, developed to my Artificial Intelligence College Final Work. This repository is outdated, with a smaller version of the AI project.
@@ -169,18 +171,12 @@ With the test evaluation (split instances and confusion matrix) results, the ECG
 
 This work was meant to a DSP undergrad-subject last project. The people involved in the project were:
 
-Student: KAWASAKI, Davi // davishinjik [at] gmail.com
+Student: KAWASAKI, Davi
 
-Student: ROZAN, Higor Augusto Bassi // higorb.rozan [at] gmail.com
+Student: ROZAN, Higor Augusto Bassi
 
-Student: BERTONCINI, João Vitor // joaobertoncini [at] alunos.utfpr.edu.br
+Student: BERTONCINI, João Vitor
 
-Student: ROMANO, Vinicius Drago // romano [at] alunos.utfpr.edu.br
+Student: ROMANO, Vinicius Drago
 
-Professor: SPATTI, Danilo Hernane // danilospatti [at] utfpr.edu.br
-
-# CONTACT & FEEDBACKS
-
-Feel free to contact or pull request me to any relevant updates you may enquire:
-
-KAWASAKI, Davi // davishinjik [at] gmail.com
+Professor: SPATTI, Danilo Hernane
